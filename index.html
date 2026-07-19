@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orc Name Generator — Male, Female & Half-Orc Names with Epithets</title>
+<meta name="description" content="Generate Orc and half-orc names instantly: brutal male and female first names plus earned epithets like the Skullcrusher. Free, unlimited, copy-ready for D&D and fantasy.">
+<link rel="canonical" href="https://orc.clickabletools.com/">
+<style>
+:root{--accent:#166534;--accent-dark:#14532d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;color:#1f2937;background:#f8fafc}
+header{background:var(--accent);color:#fff;padding:1rem}
+header .wrap{max-width:760px;margin:0 auto}
+header a{color:#fff;text-decoration:none;font-weight:700;font-size:1.2rem}
+main{max-width:760px;margin:0 auto;padding:1rem}
+h1{font-size:1.5rem;margin:.75rem 0 .25rem}
+.tagline{color:#6b7280;margin-bottom:1rem}
+.tool{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1.25rem;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:.75rem}
+.row>div{display:flex;flex-direction:column}
+label{font-weight:600;margin-bottom:.25rem}
+select{padding:.55rem;border:2px solid #d1d5db;border-radius:8px;font-size:1rem;font-family:inherit}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.7rem 1.5rem;font-size:1.05rem;font-weight:700;cursor:pointer}
+.btn:hover{background:var(--accent-dark)}
+#out{display:none;margin-top:1rem}
+.name-card{border:1px solid #e5e7eb;border-left:4px solid var(--accent);border-radius:8px;padding:.6rem .9rem;margin:.4rem 0;display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
+.name-card .n{font-size:1.15rem;font-weight:700}
+.copybtn{background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:.25rem .6rem;cursor:pointer;font-size:.85rem}
+.copybtn:hover{border-color:var(--accent);color:var(--accent)}
+.ad-slot{margin:1rem 0}
+article h2{margin:1.5rem 0 .5rem;font-size:1.2rem}
+article p,article li{margin:.5rem 0}
+article ul{padding-left:1.4rem}
+footer{max-width:760px;margin:2rem auto;padding:1rem;font-size:.85rem;color:#6b7280;border-top:1px solid #e5e7eb}
+footer a{color:#6b7280;margin-right:1rem}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="./">Orc Name Generator</a></div></header>
+<main>
+<h1>Orc Name Generator</h1>
+<p class="tagline">Brutal first names plus an earned epithet — for orcs and half-orcs alike.</p>
+
+<div class="tool">
+<div class="row">
+<div><label for="gender">Name style</label>
+<select id="gender"><option value="any">Any</option><option value="male">Male</option><option value="female">Female</option></select></div>
+<div><label for="epithet">Epithet</label>
+<select id="epithet"><option value="yes" selected>Include epithet</option><option value="no">First name only</option></select></div>
+<div><label for="qty">How many</label>
+<select id="qty"><option>1</option><option selected>5</option><option>10</option><option>20</option></select></div>
+</div>
+<button class="btn" id="gen">🪓 Generate Names</button>
+<div id="out" aria-live="polite"></div>
+</div>
+
+<div class="ad-slot" data-ad="top"></div>
+
+<article>
+<h2>How Orc names work</h2>
+<p>Orc names in Dungeons &amp; Dragons and fantasy generally are <strong>short, hard, and
+guttural</strong> — built for shouting across a battlefield: <em>Grishnak, Thok, Karg, Ugluk,
+Shautha, Neega</em>. Many orcs also carry an <strong>epithet</strong>, a title earned through a
+deed, a scar, or a reputation: <em>Karg the Skullcrusher, Thok Bloodtusk, Ovak the Unbroken</em>.
+Half-orcs raised among humans often keep an orc first name as a badge of heritage, sometimes paired
+with a human surname instead of an epithet.</p>
+<h2>Using these names at your table</h2>
+<ul>
+<li><strong>Players:</strong> generate until one lands, then say it out loud — an orc name should
+feel good to growl. Keep the epithet or drop it depending on how much backstory you want.</li>
+<li><strong>Dungeon Masters:</strong> the 20-name batch instantly fills a war-band, a raiding
+party, or a list of clan chiefs. The epithets do half your NPC design for you.</li>
+<li><strong>Writers:</strong> an epithet is a story seed — how did she become "the Merciless"?
+What did he do to earn "Doomhowl"?</li>
+</ul>
+<h2>How this generator builds names</h2>
+<p>First names are assembled from orc-styled syllables — prefix, core, and ending for male and
+female patterns — then filtered to remove awkward letter runs, giving thousands of short, snarling
+names instead of the same handful you've seen before. Epithets are drawn from a curated pool of
+earned titles. Everything is generated in your browser; nothing is stored.</p>
+</article>
+
+<div class="ad-slot" data-ad="bottom"></div>
+</main>
+
+<footer>
+<p><a href="./">Home</a> <a href="about.html">About</a> <a href="privacy.html">Privacy Policy</a> <a href="terms.html">Terms of Use</a></p>
+<p>&copy; 2026 Orc Name Generator. All rights reserved.</p>
+<p>More free tools:
+<a href="https://dragonborn.clickabletools.com/">Dragonborn Names</a>
+<a href="https://tiefling.clickabletools.com/">Tiefling Names</a>
+<a href="https://drow.clickabletools.com/">Drow Names</a>
+<a href="https://tabaxi.clickabletools.com/">Tabaxi Names</a>
+<a href="https://warriorcats.clickabletools.com/">Warrior Cat Names</a></p>
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const M={pre:["Gru","Thok","Karg","Ug","Gor","Mau","Lug","Shag","Brak","Dro","Gharn","Kru","Mub","Ront","Thar","Uz","Vrag","Yaz","Zul","Grum"],
+ mid:["","a","u","o","ar","ag","ash","uk","um","og"],
+ end:["nak","luk","bag","hur","dush","rat","sk","kan","gor","gul","mash","rok","thak","gash","nar","dug","mak","zug"]};
+const F={pre:["Bag","Em","Eng","Myev","Nee","Ov","Own","Shau","Suth","Vol","Yev","Gri","Mog","Urz","Kag","Shel","Ush","Nag","Bru","Zag"],
+ mid:["","a","e","u","ga","i","o"],
+ end:["gi","en","ong","ka","tha","ha","elda","sha","ra","ga","za","at","run","ash","na"]};
+const EP=["the Skullcrusher","Bloodtusk","the Cleaver","Ironjaw","the Merciless","Bonebreaker","the Render","Ragefang","the Undying","Grimscar","the Warbringer","Steelhide","Doomhowl","the Black","Gorehand","the Unbroken","Skullsplitter","the Ashen","Bloodmaw","the Elder"];
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function cap(n){n=n.replace(/(.)\1\1+/g,'$1$1');return n[0].toUpperCase()+n.slice(1);}
+function first(g){
+ const set=g==='male'?M:g==='female'?F:(Math.random()<.5?M:F);
+ return cap(pick(set.pre)+(Math.random()<.45?pick(set.mid):'')+pick(set.end));
+}
+$('gen').addEventListener('click',()=>{
+ const g=$('gender').value, withEp=$('epithet').value==='yes', n=+$('qty').value;
+ const cards=[];
+ for(let i=0;i<n;i++){
+  const nm=first(g)+(withEp?' '+pick(EP):'');
+  cards.push(`<div class="name-card"><span class="n">${nm}</span><button class="copybtn" data-n="${nm}">copy</button></div>`);
+ }
+ $('out').innerHTML=cards.join('');
+ $('out').style.display='block';
+ document.querySelectorAll('.copybtn').forEach(b=>b.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(b.dataset.n);}catch(e){}
+  b.textContent='copied!';setTimeout(()=>b.textContent='copy',1200);
+ }));
+});
+</script>
+</body>
+</html>
