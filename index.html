@@ -5,55 +5,203 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orc Name Generator — Male, Female & Half-Orc Names with Epithets</title>
 <meta name="description" content="Generate Orc and half-orc names instantly: brutal male and female first names plus earned epithets like the Skullcrusher. Free, unlimited, copy-ready for D&D and fantasy.">
+<meta name="theme-color" content="#166534">
 <link rel="canonical" href="https://orc.clickabletools.com/">
 <style>
-:root{--accent:#166534;--accent-dark:#14532d}
+:root{
+  --accent:#16a34a;--accent-dark:#166534;--gold:#fbbf24;--ember:#84cc16;
+  --ink:#241a17;--dim:#6b5b55;--line:rgba(70,50,45,.16);
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;color:#1f2937;background:#f8fafc}
-header{background:var(--accent);color:#fff;padding:1rem}
-header .wrap{max-width:760px;margin:0 auto}
-header a{color:#fff;text-decoration:none;font-weight:700;font-size:1.2rem}
-main{max-width:760px;margin:0 auto;padding:1rem}
-h1{font-size:1.5rem;margin:.75rem 0 .25rem}
-.tagline{color:#6b7280;margin-bottom:1rem}
-.tool{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1.25rem;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:.75rem}
-.row>div{display:flex;flex-direction:column}
-label{font-weight:600;margin-bottom:.25rem}
-select{padding:.55rem;border:2px solid #d1d5db;border-radius:8px;font-size:1rem;font-family:inherit}
-.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.7rem 1.5rem;font-size:1.05rem;font-weight:700;cursor:pointer}
-.btn:hover{background:var(--accent-dark)}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;
+  color:var(--ink);background:#f0f7f1;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* Warm, lit background — colour without the page going dark. */
+body::before{content:"";position:fixed;inset:-20%;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(42% 36% at 12% 6%,rgba(22,163,74,.20),transparent 66%),
+    radial-gradient(40% 34% at 90% 2%,rgba(251,191,36,.24),transparent 66%),
+    radial-gradient(46% 40% at 72% 96%,rgba(132,204,22,.18),transparent 64%);
+  filter:blur(24px);animation:drift 24s ease-in-out infinite alternate}
+@keyframes drift{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(-2%,2%,0) scale(1.07)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important}
+}
+
+header{background:linear-gradient(120deg,var(--accent-dark),var(--accent) 55%,var(--ember));
+  color:#fff;padding:1rem;box-shadow:0 8px 30px rgba(22,163,74,.32)}
+header .wrap{max-width:820px;margin:0 auto}
+header a{color:#fff;text-decoration:none;font-weight:800;font-size:1.2rem;letter-spacing:-.2px;
+  text-shadow:0 2px 14px rgba(0,0,0,.35)}
+main{max-width:820px;margin:0 auto;padding:1rem}
+h1{font-size:1.75rem;margin:1rem 0 .3rem;letter-spacing:-.6px;font-weight:800;
+  background:linear-gradient(96deg,var(--accent-dark),var(--accent) 45%,var(--ember));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{color:var(--dim);margin-bottom:1.1rem;font-size:1.02rem}
+
+/* ── The cabinet ──────────────────────────────────────────────────────────── */
+.tool{position:relative;border-radius:22px;padding:1.15rem;overflow:hidden;
+  background:linear-gradient(165deg,#10231a,#06120c 60%,#10231a);
+  border:1px solid rgba(251,191,36,.34);
+  box-shadow:0 24px 60px rgba(22,163,74,.30),inset 0 1px 0 rgba(255,235,190,.20)}
+.tool::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 46% at 50% -6%,rgba(251,191,36,.20),transparent 62%)}
+.cab{position:relative;display:flex;gap:.9rem;align-items:stretch}
+.reels{flex:1;display:flex;gap:.5rem;min-width:0;
+  background:rgba(0,0,0,.55);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:.55rem;
+  box-shadow:inset 0 6px 22px rgba(0,0,0,.85)}
+.reel{flex:1 1 0;min-width:0;height:186px;overflow:hidden;position:relative;border-radius:9px;
+  background:linear-gradient(#06120c,#10231a 50%,#06120c)}
+/* glass curve + the pay-line across the middle */
+.reel::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:9px;
+  background:linear-gradient(rgba(0,0,0,.92) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,0) 74%,rgba(0,0,0,.92) 100%)}
+.reel::before{content:"";position:absolute;left:0;right:0;top:50%;height:62px;
+  transform:translateY(-50%);pointer-events:none;z-index:2;
+  border-top:1px solid rgba(251,191,36,.55);border-bottom:1px solid rgba(251,191,36,.55);
+  background:linear-gradient(90deg,rgba(251,191,36,.10),rgba(251,191,36,.02))}
+.strip{position:absolute;left:0;right:0;top:50%;margin-top:-31px;will-change:transform}
+.cell{height:62px;display:grid;place-items:center;font:800 1.18rem/1.1 var(--mono);
+  color:#ffe6a3;letter-spacing:.4px;text-shadow:0 0 18px rgba(251,191,36,.45);
+  padding:0 .2rem;text-align:center;word-break:break-word}
+.reel.spin .strip{filter:blur(1.6px)}
+.reel.hit::before{animation:hit .45s ease}
+@keyframes hit{
+  0%{box-shadow:0 0 0 rgba(251,191,36,0)}
+  35%{box-shadow:0 0 34px rgba(251,191,36,.85),inset 0 0 26px rgba(251,191,36,.35)}
+  100%{box-shadow:0 0 0 rgba(251,191,36,0)}
+}
+
+/* ── The lever ────────────────────────────────────────────────────────────── */
+.lever{flex:0 0 60px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding-top:.3rem;touch-action:none;cursor:grab;outline:none;user-select:none;-webkit-user-select:none}
+.lever:active{cursor:grabbing}
+.lever .rail{position:relative;width:11px;height:150px;border-radius:99px;
+  background:linear-gradient(rgba(251,191,36,.35),rgba(0,0,0,.8));
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.9),0 0 0 1px rgba(251,191,36,.24)}
+.lever .knob{position:absolute;left:50%;top:0;width:42px;height:42px;margin-left:-21px;margin-top:-8px;
+  border-radius:50%;background:radial-gradient(circle at 34% 30%,var(--ember),var(--accent) 45%,var(--accent-dark));
+  border:2px solid rgba(255,235,190,.75);
+  box-shadow:0 8px 22px rgba(22,163,74,.6),inset 0 -4px 10px rgba(0,0,0,.45);
+  transition:transform .42s cubic-bezier(.3,1.5,.4,1)}
+.lever.dragging .knob{transition:none}
+.lever:focus-visible .rail{box-shadow:inset 0 2px 8px rgba(0,0,0,.9),0 0 0 3px var(--gold)}
+.lever .hint{margin-top:.5rem;font:800 8.5px/1.35 var(--mono);letter-spacing:1.1px;
+  text-transform:uppercase;color:var(--gold);text-align:center;opacity:.95}
+.lever.armed .knob{box-shadow:0 8px 30px rgba(251,191,36,.85),inset 0 -4px 10px rgba(0,0,0,.45)}
+
+/* ── Result display + controls ────────────────────────────────────────────── */
+.window{margin-top:.85rem;border-radius:13px;padding:.8rem .9rem;text-align:center;
+  background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.4));border:1px solid rgba(251,191,36,.3);
+  box-shadow:inset 0 3px 16px rgba(0,0,0,.7)}
+.window .lb{font:800 8.5px/1 var(--mono);letter-spacing:2px;text-transform:uppercase;
+  color:rgba(251,191,36,.85)}
+.window .big{font-size:1.6rem;font-weight:800;color:#fff;margin-top:.32rem;min-height:1.9rem;
+  letter-spacing:-.3px;text-shadow:0 0 26px rgba(251,191,36,.5);word-break:break-word}
+.window .big.win{animation:pop .5s cubic-bezier(.2,1.5,.35,1)}
+.window .sub2{font-size:.86rem;color:rgba(255,255,255,.72);margin-top:.3rem}
+@keyframes pop{from{transform:scale(.86);opacity:0}to{transform:none;opacity:1}}
+
+.row{display:flex;gap:.7rem;flex-wrap:wrap;align-items:flex-end;margin-top:.9rem}
+.row>div{display:flex;flex-direction:column;flex:1 1 150px}
+label{font:800 9px/1 var(--mono);letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.35rem}
+select{padding:.6rem;border:1px solid rgba(251,191,36,.32);border-radius:10px;font-size:1rem;
+  font-family:inherit;background:rgba(0,0,0,.55);color:#ffeecf}
+select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(251,191,36,.22)}
+select option{background:#06120c;color:#ffeecf}
+.btn{position:relative;overflow:hidden;background:linear-gradient(140deg,var(--accent),var(--ember));
+  color:#fff;border:none;border-radius:11px;padding:.75rem 1.5rem;font-size:1.03rem;font-weight:800;
+  cursor:pointer;margin-top:.9rem;
+  box-shadow:0 8px 24px rgba(22,163,74,.5),inset 0 1px 0 rgba(255,255,255,.3);
+  transition:transform .12s cubic-bezier(.3,1.5,.5,1),box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(22,163,74,.62),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn:active{transform:translateY(0) scale(.97)}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+
 #out{display:none;margin-top:1rem}
-.name-card{border:1px solid #e5e7eb;border-left:4px solid var(--accent);border-radius:8px;padding:.6rem .9rem;margin:.4rem 0;display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
-.name-card .n{font-size:1.15rem;font-weight:700}
-.copybtn{background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:.25rem .6rem;cursor:pointer;font-size:.85rem}
+.outhead{font:800 9px/1 var(--mono);letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);margin:1.1rem 0 .5rem}
+.name-card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:11px;padding:.65rem .9rem;margin:.45rem 0;display:flex;justify-content:space-between;
+  align-items:center;gap:.5rem;flex-wrap:wrap;
+  box-shadow:0 4px 14px rgba(22,163,74,.09);
+  transition:transform .18s,box-shadow .18s,border-left-color .18s;
+  animation:rise .45s cubic-bezier(.2,.9,.3,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.name-card:hover{transform:translateX(4px);border-left-color:var(--gold);
+  box-shadow:0 10px 26px rgba(22,163,74,.18)}
+.name-card .n{font-size:1.16rem;font-weight:800}
+.name-card .meaning{display:block;font-size:.85rem;color:var(--dim);font-weight:600;margin-top:.15rem}
+.copybtn{background:#fff;border:1px solid var(--line);border-radius:8px;padding:.3rem .7rem;
+  cursor:pointer;font-size:.85rem;font-weight:700;color:var(--dim);transition:.16s}
 .copybtn:hover{border-color:var(--accent);color:var(--accent)}
+.copybtn.done{background:var(--accent);border-color:var(--accent);color:#fff}
+
 .ad-slot{margin:1rem 0}
-article h2{margin:1.5rem 0 .5rem;font-size:1.2rem}
+article h2{margin:1.6rem 0 .5rem;font-size:1.22rem;color:var(--ink)}
 article p,article li{margin:.5rem 0}
 article ul{padding-left:1.4rem}
-footer{max-width:760px;margin:2rem auto;padding:1rem;font-size:.85rem;color:#6b7280;border-top:1px solid #e5e7eb}
-footer a{color:#6b7280;margin-right:1rem}
+footer{max-width:820px;margin:2rem auto;padding:1rem;font-size:.85rem;color:var(--dim);
+  border-top:1px solid var(--line)}
+footer a{color:var(--dim);margin-right:1rem}
+footer a:hover{color:var(--accent)}
+
+@media(max-width:560px){
+  .reel{height:158px}
+  .cell{height:52px;font-size:1rem}
+  .strip{margin-top:-26px}
+  .reel::before{height:52px}
+  .lever{flex:0 0 52px}
+  .lever .rail{height:126px}
+  .window .big{font-size:1.32rem}
+}
 </style>
 </head>
 <body>
 <header><div class="wrap"><a href="./">Orc Name Generator</a></div></header>
 <main>
 <h1>Orc Name Generator</h1>
-<p class="tagline">Brutal first names plus an earned epithet — for orcs and half-orcs alike.</p>
+<p class="tagline">Haul the lever down and let it clatter to a stop — a brutal orc name, with an earned epithet if you want one.</p>
 
 <div class="tool">
-<div class="row">
-<div><label for="gender">Name style</label>
-<select id="gender"><option value="any">Any</option><option value="male">Male</option><option value="female">Female</option></select></div>
-<div><label for="epithet">Epithet</label>
-<select id="epithet"><option value="yes" selected>Include epithet</option><option value="no">First name only</option></select></div>
-<div><label for="qty">How many</label>
-<select id="qty"><option>1</option><option selected>5</option><option>10</option><option>20</option></select></div>
+  <div class="cab">
+    <div class="reels">
+      <div class="reel" id="r0"><div class="strip" id="s0"></div></div>
+      <div class="reel" id="r1"><div class="strip" id="s1"></div></div>
+      <div class="reel" id="r2"><div class="strip" id="s2"></div></div>
+    </div>
+    <div class="lever" id="lever" role="slider" tabindex="0"
+         aria-label="Pull the lever to roll new names"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="rail"><div class="knob" id="knob"></div></div>
+      <div class="hint">Pull<br>down</div>
+    </div>
+  </div>
+
+  <div class="window">
+    <div class="lb">Your roll</div>
+    <div class="big" id="big">&mdash;</div>
+    <div class="sub2" id="sub2"></div>
+  </div>
+
+  <div class="row">
+    <div><label for="gender">Name style</label>
+      <select id="gender"><option value="any">Any</option><option value="male">Male</option><option value="female">Female</option></select></div>
+    <div><label for="epithet">Epithet</label>
+      <select id="epithet"><option value="yes" selected>Include epithet</option><option value="no">Name only</option></select></div>
+    <div><label for="qty">How many</label>
+      <select id="qty"><option>1</option><option selected>5</option><option>10</option><option>20</option></select></div>
+  </div>
+
+  <button class="btn" id="gen">&#128481; Pull the lever</button>
 </div>
-<button class="btn" id="gen">🪓 Generate Names</button>
+
 <div id="out" aria-live="polite"></div>
-</div>
 
 <div class="ad-slot" data-ad="top"></div>
 
@@ -96,6 +244,7 @@ earned titles. Everything is generated in your browser; nothing is stored.</p>
 </footer>
 
 <script>
+
 const $=id=>document.getElementById(id);
 const M={pre:["Gru","Thok","Karg","Ug","Gor","Mau","Lug","Shag","Brak","Dro","Gharn","Kru","Mub","Ront","Thar","Uz","Vrag","Yaz","Zul","Grum"],
  mid:["","a","u","o","ar","ag","ash","uk","um","og"],
@@ -110,20 +259,157 @@ function first(g){
  const set=g==='male'?M:g==='female'?F:(Math.random()<.5?M:F);
  return cap(pick(set.pre)+(Math.random()<.45?pick(set.mid):'')+pick(set.end));
 }
-$('gen').addEventListener('click',()=>{
- const g=$('gender').value, withEp=$('epithet').value==='yes', n=+$('qty').value;
- const cards=[];
- for(let i=0;i<n;i++){
-  const nm=first(g)+(withEp?' '+pick(EP):'');
-  cards.push(`<div class="name-card"><span class="n">${nm}</span><button class="copybtn" data-n="${nm}">copy</button></div>`);
- }
- $('out').innerHTML=cards.join('');
- $('out').style.display='block';
- document.querySelectorAll('.copybtn').forEach(b=>b.addEventListener('click',async()=>{
-  try{await navigator.clipboard.writeText(b.dataset.n);}catch(e){}
-  b.textContent='copied!';setTimeout(()=>b.textContent='copy',1200);
- }));
-});
+
+function bank(i){
+  const g=$("gender").value;
+  const a=g==='female'?F:M, b=g==='male'?M:F;
+  const u=x=>Array.from(new Set(x.filter(v=>v!=="")));
+  if(i===0) return u(a.pre.concat(b.pre)).slice(0,20);
+  if(i===1) return u(a.mid.concat(b.mid)).concat(["\u00b7"]).slice(0,12);
+  return u(a.end.concat(b.end)).slice(0,20);
+}
+function reelBanks(){return [0,1,2].map(bank);}
+function headlineFrom(c){
+  let nm=cap(c[0]+(c[1]==="\u00b7"?"":c[1])+c[2]);
+  if($("epithet").value==='yes') nm+=" "+pick(EP);
+  return {name:nm};
+}
+function batchOf(n,head){
+  const g=$("gender").value, we=$("epithet").value==='yes';
+  const out=[{name:head.name}];
+  for(let i=1;i<n;i++) out.push({name:first(g)+(we?' '+pick(EP):'')});
+  return out;
+}
+
+/* ── Slot machine ───────────────────────────────────────────────────────────
+   The reels are the actual word banks this generator assembles names from,
+   so the spin shows the real machinery instead of being decoration. Reels
+   stop left-to-right; the batch to choose from reveals after the last one
+   lands. Pure CSS transforms — no library, no images, no network.
+
+   Three hooks are supplied per site below:
+     reelBanks()      -> one array of strings per reel, honouring the controls
+     headlineFrom(c)  -> {name, sub} built from the cells the reels landed on
+     batchOf(n, head) -> the full list of choices, headline first
+                                                                            */
+const NREELS=3;
+const CELL_H=window.matchMedia("(max-width:560px)").matches?52:62;
+const LOOPS=8;
+const REDUCED=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+let spinning=false;
+
+function fillStrip(i,bank){
+  const s=$("s"+i);
+  let h="";
+  for(let L=0;L<LOOPS;L++) bank.forEach(v=>{h+='<div class="cell"></div>';});
+  s.innerHTML=h;
+  // textContent per cell so a bank value can never inject markup
+  const cells=s.children;
+  for(let L=0;L<LOOPS;L++) bank.forEach((v,j)=>{cells[L*bank.length+j].textContent=v;});
+  s.style.transition="none";
+  s.style.transform="translateY(0)";
+}
+function spinReel(i,bank,landOn,dur){
+  return new Promise(res=>{
+    const s=$("s"+i), reel=$("r"+i);
+    const idx=(LOOPS-2)*bank.length+landOn;
+    reel.classList.add("spin");
+    void s.offsetHeight;                        // commit the reset before animating
+    s.style.transition="transform "+dur+"ms cubic-bezier(.12,.72,.18,1)";
+    s.style.transform="translateY(-"+(idx*CELL_H)+"px)";
+    setTimeout(()=>{
+      reel.classList.remove("spin");
+      reel.classList.add("hit");
+      setTimeout(()=>reel.classList.remove("hit"),460);
+      res();
+    },dur);
+  });
+}
+
+async function roll(){
+  if(spinning) return;
+  spinning=true;
+  $("gen").disabled=true;
+  const n=+$("qty").value;
+  $("out").style.display="none";
+  $("big").classList.remove("win");
+  $("big").textContent="…";
+  const subEl=$("sub2"); if(subEl) subEl.textContent="";
+
+  const banks=reelBanks();
+  const land=banks.map(b=>Math.floor(Math.random()*b.length));
+  banks.forEach((b,i)=>fillStrip(i,b));
+
+  const base=REDUCED?120:1500;
+  await Promise.all(banks.map((b,i)=>spinReel(i,b,land[i],base+i*(REDUCED?60:420))));
+
+  const head=headlineFrom(banks.map((b,i)=>b[land[i]]));
+  $("big").textContent=head.name;
+  $("big").classList.add("win");
+  if(subEl) subEl.textContent=head.sub||"";
+
+  const items=batchOf(n,head);
+  $("out").innerHTML='<div class="outhead">'+items.length+' to choose from</div>'+
+    items.map((it,i)=>'<div class="name-card" style="animation-delay:'+Math.min(i*45,540)+'ms">'+
+      '<span class="n"><span class="nm"></span><span class="meaning"></span></span>'+
+      '<button class="copybtn">copy</button></div>').join('');
+  const cards=$("out").querySelectorAll(".name-card");
+  items.forEach((it,i)=>{
+    cards[i].querySelector(".nm").textContent=it.name;      // textContent = no injection
+    const m=cards[i].querySelector(".meaning");
+    if(it.sub) m.textContent=it.sub; else m.remove();
+    const b=cards[i].querySelector(".copybtn");
+    b.addEventListener("click",async()=>{
+      try{await navigator.clipboard.writeText(it.copy||it.name);}catch(e){}
+      b.textContent="copied!";b.classList.add("done");
+      setTimeout(()=>{b.textContent="copy";b.classList.remove("done");},1200);
+    });
+  });
+  $("out").style.display="block";
+  $("gen").disabled=false;
+  spinning=false;
+}
+
+/* ── The lever. A real drag with mouse or thumb, and fully keyboard-driven
+      (it is a slider, so arrows/Enter/Space work) so it never traps anyone. */
+(function(){
+  const lever=$("lever"), knob=$("knob");
+  const TRAVEL=110;
+  let dragging=false, startY=0, y=0;
+  function setY(v){
+    y=Math.max(0,Math.min(TRAVEL,v));
+    knob.style.transform="translateY("+y+"px)";
+    lever.setAttribute("aria-valuenow",Math.round(y/TRAVEL*100));
+    lever.classList.toggle("armed",y>TRAVEL*.55);
+  }
+  function release(){
+    if(!dragging) return;
+    dragging=false;lever.classList.remove("dragging");
+    const fired=y>TRAVEL*.55;
+    setY(0);
+    if(fired) roll();
+  }
+  lever.addEventListener("pointerdown",e=>{
+    if(spinning) return;
+    dragging=true;startY=e.clientY;lever.classList.add("dragging");
+    try{lever.setPointerCapture(e.pointerId);}catch(err){}
+    e.preventDefault();
+  });
+  lever.addEventListener("pointermove",e=>{ if(dragging) setY(e.clientY-startY); });
+  lever.addEventListener("pointerup",release);
+  lever.addEventListener("pointercancel",release);
+  lever.addEventListener("keydown",e=>{
+    if(e.key==="Enter"||e.key===" "||e.key==="ArrowDown"){
+      e.preventDefault();
+      if(spinning) return;
+      setY(TRAVEL);setTimeout(()=>{setY(0);roll();},170);
+    }
+  });
+})();
+
+$("gen").addEventListener("click",roll);
+// Prime the reels so the machine looks loaded before the first pull.
+reelBanks().forEach((b,i)=>fillStrip(i,b));
 </script>
 </body>
 </html>
